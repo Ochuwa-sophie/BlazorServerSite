@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 namespace BlazorApp.Data
 {
     
-
-
-// 
-//     public class WeatherForecastService
-//     {
+     public class FormService
+     {
+        public static List<T> LoadData<T, U>(string sql, U parameters, string connectionString)
+        using(IDbConnection )
 //         private static readonly string[] Summaries = new[]
 //         {
 //             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -25,5 +24,5 @@ namespace BlazorApp.Data
 //                 Summary = Summaries[rng.Next(Summaries.Length)]
 //             }).ToArray());
 //         }
-//     }
+    }
 }
