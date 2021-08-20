@@ -1,28 +1,39 @@
+using BlazorApp.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorApp.Data
+public class FormService
 {
-    
-     public class FormService
-     {
-        public static List<T> LoadData<T, U>(string sql, U parameters, string connectionString)
-        using(IDbConnection )
-//         private static readonly string[] Summaries = new[]
-//         {
-//             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-//         };
+    #region Private members
+    private FormDbContext dbContext;
+    #endregion
 
-//         public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
-//         {
-//             var rng = new Random();
-//             return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
-//             {
-//                 Date = startDate.AddDays(index),
-//                 TemperatureC = rng.Next(-20, 55),
-//                 Summary = Summaries[rng.Next(Summaries.Length)]
-//             }).ToArray());
-//         }
+    #region Constructor
+    public FormService(FormDbContext dbContext)
+    {
+        this.dbContext = dbContext;
     }
+    #endregion
+    /// <summary>
+    /// This method add a new product to the DbContext and saves it
+    /// </summary>
+    /// <param name="form"></param>
+    /// <returns></returns>
+    public async Task<Form> AddFormAsync(Form form)
+    {
+        try
+        {
+            dbContext.forms.Add(form);
+            await dbContext.SaveChangesAsync();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+        return form;
+    }
+
 }
+
